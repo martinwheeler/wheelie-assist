@@ -1,27 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7fdbd3e-eb00-46d4-b45b-6a51ce17a1bb" name="Default" comment="" />
+    <list default="true" id="c7fdbd3e-eb00-46d4-b45b-6a51ce17a1bb" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/2.14.1/tasks/_react-native-ble-plx_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/exploded-aar/wheelieassist/react-native-ble-plx/unspecified/annotations.zip" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/exploded-aar/wheelieassist/react-native-ble-plx/unspecified/annotations.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/zip-cache/RfrPdQ05WZFkEa2QesoBLws9JhI=" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/zip-cache/RfrPdQ05WZFkEa2QesoBLws9JhI=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_01c2a2df5ad29cea3638033632a9503be3e9f82a.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_01c2a2df5ad29cea3638033632a9503be3e9f82a.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_0bf533005ed3edd33a0adf43f2ed731df0d0f563.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_0bf533005ed3edd33a0adf43f2ed731df0d0f563.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_f2f5076927a50d114e5f099fe1da4fcd9250f3b9.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_f2f5076927a50d114e5f099fe1da4fcd9250f3b9.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.artemzin.rxjava-proguard-rules-1.3.2.0_83956f18c846af67486158fdb77abf9160749783.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.artemzin.rxjava-proguard-rules-1.3.2.0_83956f18c846af67486158fdb77abf9160749783.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_36d1101370af2ea9d5e5a69d675439fab674d252.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_36d1101370af2ea9d5e5a69d675439fab674d252.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_2a777394a9ec62861abc8a880b878b58f418644f.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_2a777394a9ec62861abc8a880b878b58f418644f.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_af03969f94f71f082d01cec2ba083474e728fee6.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_af03969f94f71f082d01cec2ba083474e728fee6.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_a2c7b52356a2931cba134ff7cbd8d54ad5de1da1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_a2c7b52356a2931cba134ff7cbd8d54ad5de1da1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_1fdbd05f6a21d3384c014578ae6c39d03bad5ce3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_1fdbd05f6a21d3384c014578ae6c39d03bad5ce3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_f1e82337533f0450eb1f074444c5ef134a8c4409.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_f1e82337533f0450eb1f074444c5ef134a8c4409.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_fec86661ef6218b8b6d20f758e947966f18f7beb.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_fec86661ef6218b8b6d20f758e947966f18f7beb.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_9cf6d5742dc1bdb26b47335b0a212222c4ebbe48.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_9cf6d5742dc1bdb26b47335b0a212222c4ebbe48.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_d85cfdf7a1260b1fcea7b2d12d7e7e1da9e6662a.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_d85cfdf7a1260b1fcea7b2d12d7e7e1da9e6662a.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.polidea.rxandroidble-rxandroidble-1.4.3_ce0752cb23b4d94961fdcfc7f6d6a2be147108d7.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/com.polidea.rxandroidble-rxandroidble-1.4.3_ce0752cb23b4d94961fdcfc7f6d6a2be147108d7.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/dagger-2.8_8ce8547a708a7983b2aeeb60e735bdeeff3d301c.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/dagger-2.8_8ce8547a708a7983b2aeeb60e735bdeeff3d301c.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/debug_471ab2cf17c20f4893b5a51ea3faf0a32a8dd4f5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/debug_471ab2cf17c20f4893b5a51ea3faf0a32a8dd4f5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_c481b279735232153b70ccd85e709a287fde0a13.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_c481b279735232153b70ccd85e709a287fde0a13.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_4ab85012a729cd974b6a88bc9db8001317ca09e2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_4ab85012a729cd974b6a88bc9db8001317ca09e2.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_7cf911ef8a2ecc15010651cc8dcb0e712db92541.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_7cf911ef8a2ecc15010651cc8dcb0e712db92541.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_1a5f9d475a81f94a0664880ee43874c159faf19f.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_1a5f9d475a81f94a0664880ee43874c159faf19f.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_f620a1d53bf954b1955b5196eaf4a9d63292ec61.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_f620a1d53bf954b1955b5196eaf4a9d63292ec61.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_957348fd0248fff5a531876b6bf69b6def867900.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_957348fd0248fff5a531876b6bf69b6def867900.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_b095bc318833eb169018facba2b28cfecfea8ffe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_b095bc318833eb169018facba2b28cfecfea8ffe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/rxjava-1.3.2_939d4a1a792110cb9efbc396c9b23f22d844e157.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/rxjava-1.3.2_939d4a1a792110cb9efbc396c9b23f22d844e157.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/rxrelay-1.2.0_f27949442df9fc9861d0f04bdcc42df17259bafb.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/rxrelay-1.2.0_f27949442df9fc9861d0f04bdcc42df17259bafb.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_f04045fe83fe4952658189c6320dfb2d9f973b79.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_f04045fe83fe4952658189c6320dfb2d9f973b79.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/support-annotations-25.3.1_319b964481c54199568220eec1f453db6a79587b.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/support-annotations-25.3.1_319b964481c54199568220eec1f453db6a79587b.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/wheelieassist-react-native-ble-plx-unspecified_7d6c01a7ad222e846e6910cd43c14d80fcac7ca9.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/pre-dexed/debug/wheelieassist-react-native-ble-plx-unspecified_7d6c01a7ad222e846e6910cd43c14d80fcac7ca9.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/res/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/res/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/outputs/apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/outputs/apk/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/ios/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="59" column="143" lean-forward="true" selection-start-line="59" selection-start-column="143" selection-end-line="59" selection-end-column="143" />
+            <state relative-caret-position="454">
+              <caret line="125" column="40" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>console</find>
+      <find>Woo</find>
+      <find>sneakyLog</find>
+      <find>serviceCharacteristics</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -54,12 +116,16 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1920" />
     <option name="height" value="1200" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <autoscrollFromSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -69,7 +135,7 @@
           <expand>
             <path>
               <item name="wheelie-assist" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wheelie-assist" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="wheelie-assist" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -197,44 +263,46 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527498747760</updated>
-      <workItem from="1527498834114" duration="2977000" />
+      <workItem from="1527498834114" duration="3104000" />
+      <workItem from="1527550712556" duration="16000" />
+      <workItem from="1527589409066" duration="6083000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2977000" />
+    <option name="totallyTimeSpent" value="9203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="3440" height="1440" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info id="npm" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32980973" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24970931" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13949382" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Captures" order="3" weight="0.25" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32980973" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Captures" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,8 +314,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="59" column="143" lean-forward="true" selection-start-line="59" selection-start-column="143" selection-end-line="59" selection-end-column="143" />
+        <state relative-caret-position="454">
+          <caret line="125" column="40" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
         </state>
       </provider>
     </entry>

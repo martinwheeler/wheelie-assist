@@ -1,20 +1,52 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
+import { StyleSheet, FlatList, View, Text } from 'react-native';
+import base64 from 'base-64';
 
 const sneakyLog = (meta, data) => {
   console.log(meta, data);
   return data;
 };
 
-export default class App extends React.Component {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  deviceName: {
+    backgroundColor: '#32b3ff',
+    padding: 5,
+    margin: 10
+  },
+  deviceService: {
+    backgroundColor: '#00FF00',
+    padding: 5,
+    margin: 10
+  }
+});
 
+@autobind
+class App extends React.Component {
   constructor (props) {
     super(props);
+
+    this.state = {
+      nearbyDevices: [],
+      deviceServices: [],
+      serviceCharacteristics: [],
+      chosenService: null,
+      characteristicValue: 'Nothing read yet...'
+    };
+
+    this.connectedDevice = null;
+
     this.manager = new BleManager();
-    this.logValue = sneakyLog('Wooooo');
-    this.scanAndConnect = this.scanAndConnect.bind(this);
-    this.reconnect = this.reconnect.bind(this);
+    this.deviceKeyExtractor = (device) => device.id;
+    this.serviceKeyExtractor = (service) => service.uuid;
+    this.characteristicKeyExtractor = (characteristic) => characteristic.uuid;
   }
 
   componentWillUnmount () {
@@ -34,35 +66,22 @@ export default class App extends React.Component {
     this.manager.startDeviceScan(null, null, (error, device) => {
       if (error) {
         // Handle error (scanning will be stopped automatically)
-        return
+        return;
       }
 
-      // Check if it is a device you are looking for based on advertisement data
-      // or other criteria.
-      if (sneakyLog('SCANNING: ', device.name) === 'LE-Deep Space Fine') {
+      if (device.name) {
+        const containsDevice = this.state.nearbyDevices.find(currentDevice => device.name === currentDevice.name);
 
-        // Stop scanning as it's not necessary if you are scanning for one device.
-        this.manager.stopDeviceScan();
-
-        // Proceed with connection.
-        device.connect()
-          .then((device) => {
-            device.isConnected()
-              .then(response => {
-                sneakyLog('isConnected: ', response);
-              });
-            return sneakyLog('Characteristics: ', device.discoverAllServicesAndCharacteristics());
-          })
-          .then((device) => {
-            // Do work on device with services and characteristics
-            device.services()
-              .then(response => {
-                console.log('services: ', response[0]['_manager']['_eventEmitter']['_subscriber']['_subscriptionsForType']['hardwareBackPress']);
-              });
-          })
-          .catch((error) => {
-            // Handle errors
+        if (!containsDevice) {
+          this.setState({
+            nearbyDevices: [
+              ...new Set([
+                ...this.state.nearbyDevices,
+                device
+              ]),
+            ]
           });
+        }
       }
     });
   }
@@ -79,23 +98,97 @@ export default class App extends React.Component {
     }, true);
   }
 
+  connectToDevice (currentDevice) {
+    // alert(currentDevice.name);
+    this.manager.stopDeviceScan();
+    this.manager.connectToDevice(currentDevice.id)
+      .then(connectedDevice => {
+
+          connectedDevice.discoverAllServicesAndCharacteristics()
+            .then((device) => {
+              this.connectedDevice = device;
+              // Do work on device with services and characteristics
+              device.services()
+                .then(services => {
+                  this.setState({
+                    deviceServices: services
+                  });
+                })
+            })
+            .catch((error) => {
+              // Handle errors
+            });
+      });
+
+  }
+
+  getServiceCharacteristics (service) {
+    this.connectedDevice.characteristicsForService(service.uuid)
+      .then(characteristics => {
+        this.setState({ serviceCharacteristics: characteristics })
+      })
+  }
+
+  readCharacteristic (characteristicId) {
+    const { chosenService } = this.state;
+    this.connectedDevice.readCharacteristicForService(chosenService.uuid, sneakyLog('NATIVE_APP ID', characteristicId))
+      .then(response => {
+        this.setState({ characteristicValue: sneakyLog('NATIVE_APP Response', base64.decode(response.value)) });
+      })
+  }
+
+  renderDevices ({ item: device }) {
+    const handlePress = () => this.connectToDevice(device);
+    return (
+      <Text onPress={handlePress} style={styles.deviceName}>{device.name}</Text>
+    );
+  }
+
+  renderDeviceServices ({ item: service }) {
+    const handlePress = () => {
+      this.setState({ chosenService: service });
+      this.getServiceCharacteristics(service)
+    };
+    return (
+      <Text onPress={handlePress} style={styles.deviceService}>{service.uuid}</Text>
+    );
+  }
+
+  renderServiceCharacteristics ({ item: characteristic }) {
+    const handlePress = () => {
+      this.readCharacteristic(characteristic.uuid);
+    };
+    return (
+      <Text onPress={handlePress} style={styles.deviceService}>{Object.keys(characteristic)}</Text>
+    );
+  }
+
   render() {
+    const { nearbyDevices, deviceServices, serviceCharacteristics, characteristicValue } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Hello World!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Button title={'reconnect'} onPress={this.reconnect}>Reconnect</Button>
+        <FlatList
+          data={nearbyDevices}
+          keyExtractor={this.deviceKeyExtractor}
+          renderItem={this.renderDevices}
+        />
+
+        <FlatList
+          data={deviceServices}
+          keyExtractor={this.serviceKeyExtractor}
+          renderItem={this.renderDeviceServices}
+        />
+
+        <FlatList
+          data={serviceCharacteristics}
+          keyExtractor={this.characteristicKeyExtractor}
+          renderItem={this.renderServiceCharacteristics}
+        />
+
+        <Text>{characteristicValue}</Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
