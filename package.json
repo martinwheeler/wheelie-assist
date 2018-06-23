@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@target-corp/react-native-svg-parser": "^1.0.5",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "base-64": "^0.1.0",
     "core-decorators": "^0.20.0",
     "jest": "^23.0.1",
     "jest-react-native": "^18.0.0",
+    "react-native-svg": "^6.3.1",
     "react-navigation": "^2.5.1",
     "react-test-renderer": "16.3.1"
   },

@@ -1,8 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Button } from 'react-native';
-import base64 from 'base-64';
+import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback } from 'react-native';
 
 const sneakyLog = (meta) => (data) => {
   console.log(meta, data);
@@ -15,11 +14,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 25
+  },
+  listContainer: {
+    paddingTop: 40,
+    flex: 1
+  },
+  summary: {
+    fontWeight: "400",
+    fontSize: 14,
+    paddingLeft: 30,
+    paddingRight: 30
+  },
+  deviceContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    borderColor: 'hsla(272, 0%, 80%, 1)',
+    borderBottomWidth: 1,
+    padding: 15,
   },
   deviceName: {
-    backgroundColor: '#32b3ff',
-    padding: 5,
-    margin: 10
+    margin: 0,
+    fontWeight: "600",
+    fontSize: 16,
+    lineHeight: 24,
+    paddingLeft: 10
   },
   deviceService: {
     backgroundColor: '#00FF00',
@@ -33,9 +52,9 @@ class DeviceSelect extends React.Component {
   static navigationOptions = {
     title: 'Select Device',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: 'hsla(353, 82%, 45%, 1)',
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#FFF',
     headerTitleStyle: {
       fontWeight: 'bold',
     }
@@ -47,7 +66,8 @@ class DeviceSelect extends React.Component {
     this.state = {
       info: '',
       values: {},
-      nearbyDevices: []
+      nearbyDevices: [],
+      loading: false
     };
 
     this.deviceKeyExtractor = (device) => device.id;
@@ -86,8 +106,6 @@ class DeviceSelect extends React.Component {
       null,
       null,
       (error, device) => {
-        this.info("Scanning...")
-
         if (error) {
           this.error(error.message)
           return
@@ -111,7 +129,6 @@ class DeviceSelect extends React.Component {
   }
 
   connectToDevice (chosenDevice, args) {
-    this.info(`Connecting to ${chosenDevice.name}`);
     this.manager && this.manager.stopDeviceScan();
 
     if (this.connectedDevice) {
@@ -128,7 +145,6 @@ class DeviceSelect extends React.Component {
           return chosenDevice.connect()
             .then((device) => {
               this.connectedDevice = device;
-              this.info("Discovering services and characteristics")
               return device.discoverAllServicesAndCharacteristics()
             })
         }
@@ -138,26 +154,54 @@ class DeviceSelect extends React.Component {
   renderDevices ({ item: device }) {
         const { navigation: { navigate } } = this.props;
         const handlePress = () => {
-            this.connectToDevice(device, { autoConnect: true })
-                .then((connectedDevice) => navigate('Home', { device: connectedDevice }));
+          this.info(`Connecting to ${device.name}`)
+          
+          setTimeout(() => this.setState({ loading: true }), 250);
+
+          // TODO: Move the connection logic to the next screen as the lag of navigation
+          // feels super janky
+          this.connectToDevice(device, { autoConnect: true })
+              .then((connectedDevice) => {
+                this.setState({ loading: false });
+                navigate('Home', { device: connectedDevice })
+              })
+              .catch(error => {
+                this.setState({ loading: false });
+                this.error(error);
+              });
         };
         return (
-            <Text onPress={handlePress} style={styles.deviceName}>{device.name}</Text>
+          <TouchableNativeFeedback
+            onPress={handlePress}
+            background={TouchableNativeFeedback.SelectableBackground()}
+          >
+            <View style={styles.deviceContainer}>
+              <Image height={24} source={require('../assets/images/bluetooth.png')} />
+              <Text style={styles.deviceName}>{device.name}</Text>
+            </View>
+          </TouchableNativeFeedback>
         );
   }
 
   render() {
-    const { nearbyDevices, info } = this.state;
+    const { nearbyDevices, info, loading } = this.state;
     const { navigation: { navigate } } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Select the Wheelie Assist from the devices below.</Text>
-        <FlatList
-          data={nearbyDevices}
-          keyExtractor={this.deviceKeyExtractor}
-          renderItem={this.renderDevices}
-        />
-        <Text>{info}</Text>
+        <Text style={styles.summary}>Select your Wheelie Assist from the devices below.</Text>
+        {!loading && (
+          <FlatList
+            style={styles.listContainer}
+            data={nearbyDevices}
+            keyExtractor={this.deviceKeyExtractor}
+            renderItem={this.renderDevices}
+          />
+        )}
+        {loading && (
+          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+            <Text>{info}</Text>
+          </View>
+        )}
       </View>
     );
   }
