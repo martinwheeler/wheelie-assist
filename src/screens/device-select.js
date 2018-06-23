@@ -29,7 +29,18 @@ const styles = StyleSheet.create({
 });
 
 @autobind
-class App extends React.Component {
+class DeviceSelect extends React.Component {
+  static navigationOptions = {
+    title: 'Select Device',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
+  };
+
   constructor (props) {
     super(props);
 
@@ -39,21 +50,26 @@ class App extends React.Component {
       nearbyDevices: []
     };
 
-    this.manager = new BleManager();
     this.deviceKeyExtractor = (device) => device.id;
   }
 
   componentWillUnmount () {
-    this.manager && this.manager.destroy();
+    this.manager.destroy();
   }
 
   componentWillMount () {
+    this.manager = new BleManager();
+    this.setState({ nearbyDevices: [] }); // Clear the list
+
     if (Platform.OS === 'ios') {
-      this.manager.onStateChange((state) => {
-        if (state === 'PoweredOn') this.scanDevices()
+      const subscription = this.manager.onStateChange((state) => {
+        if (state === 'PoweredOn') {
+          this.scanDevices();
+          subscription.remove();
+        }
       })
     } else {
-      this.scanDevices()
+      this.scanDevices();
     }
   }
 
@@ -96,14 +112,26 @@ class App extends React.Component {
 
   connectToDevice (chosenDevice, args) {
     this.info(`Connecting to ${chosenDevice.name}`);
-    this.manager.stopDeviceScan();
+    this.manager && this.manager.stopDeviceScan();
 
-    // chosenDevice.onDisconnected(this.handleDeviceDisconnection);
-    return chosenDevice.connect(args)
-      .then((device) => {
-        this.connectedDevice = device;
-        this.info("Discovering services and characteristics")
-        return device.discoverAllServicesAndCharacteristics()
+    if (this.connectedDevice) {
+      this.manager = new BleManager();
+      this.connectedDevice = null;
+    }
+
+    return this.manager.isDeviceConnected(chosenDevice.id)
+      .then((isConnected) => {
+        if (isConnected) {
+          this.connectedDevice = chosenDevice;
+          return chosenDevice.discoverAllServicesAndCharacteristics();
+        } else {
+          return chosenDevice.connect()
+            .then((device) => {
+              this.connectedDevice = device;
+              this.info("Discovering services and characteristics")
+              return device.discoverAllServicesAndCharacteristics()
+            })
+        }
       });
   }
 
@@ -135,4 +163,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default DeviceSelect;

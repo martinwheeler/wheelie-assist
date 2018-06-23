@@ -30,49 +30,55 @@ const styles = StyleSheet.create({
 });
 
 @autobind
-class App extends React.Component {
+class Home extends React.Component {
+  static navigationOptions = {
+    title: 'Wheelie Angle',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
+  };
+
   constructor (props) {
     super(props);
 
-    // this.manager = new BleManager()
-    // this.state = {}
-
     this.state = {
-      info: 'Default',
-      values: {},
-      nearbyDevices: [],
-      deviceServices: [],
-      serviceCharacteristics: [],
-      chosenService: null,
-      // characteristicValue: 'Nothing read yet...'
+      info: '',
+      values: {}
     };
-
-    this.prefixUUID = "f000aa"
-    this.suffixUUID = "-0451-4000-b000-000000000000"
-    this.sensors = {
-      0: "Temperature",
-      1: "Accelerometer",
-      2: "Humidity",
-      3: "Magnetometer",
-      4: "Barometer",
-      5: "Gyroscope"
-    }
-
-    this.connectedDevice = this.props.navigation.getParam('device', null);
-    this.manager = new BleManager();
   }
 
   componentWillUnmount () {
-    this.manager && this.manager.destroy();
+    this.manager.cancelDeviceConnection(this.connectedDevice.id)
+    this.manager.destroy();
   }
 
   componentWillMount () {
-    if (this.connectedDevice) {
-      this.manager.onDeviceDisconnected(this.connectedDevice.id, (error, device) => this.error('The Wheelie Assist has lost connection. Re-connecting...'));
-      this.setupNotifications(this.connectedDevice);
-    } else {
-      this.error('Please re-select your Wheelie Assist device from settings.');
-    }
+    this.connectedDevice = this.props.navigation.getParam('device', null);
+    this.manager = new BleManager();
+
+    this.manager.connectedDevices([serviceUUID])
+      .then(devices => {
+        console.log('NATIVE_APP', devices);
+        const [myDevice] = devices;
+        myDevice.isConnected()
+          .then(response => {
+            if (!response) return myDevice.connect();
+          })
+          .then(() => {
+            console.log('NATIVE_APP Connected', response)
+          })
+      })
+
+    // if (this.connectedDevice && this.manager) {
+    //   this.manager.onDeviceDisconnected(this.connectedDevice.id, (error, device) => this.error('The Wheelie Assist has lost connection. Re-connecting...'));
+    //   this.setupNotifications(this.connectedDevice);
+    // } else {
+    //   this.error('Please re-select your Wheelie Assist device from settings.');
+    // }
   }
 
   info(message) {
@@ -92,17 +98,12 @@ class App extends React.Component {
       device.readCharacteristicForService(serviceUUID, characteristicUUID)
         .then(characteristic => {
           this.connectedCharacteristic = characteristic;
-          this.info('Setting value');
-          sneakyLog('NATIVE_APP')(base64.decode(characteristic.value));
-          // characteristic && characteristic.value && this.info(base64.decode(characteristic.value));
           this.startPollingValue();
         });
   }
 
   startPollingValue () {
     this.pollingInterval = setInterval(() => {
-      // this
-
       this.connectedCharacteristic.read()
         .then(newValue => {
           this.info(base64.decode(newValue.value));
@@ -110,22 +111,14 @@ class App extends React.Component {
     }, 500);
   }
 
-  renderDevices ({ item: device }) {
-    const handlePress = () => this.connectToDevice(device, { autoConnect: true });
-    return (
-      <Text onPress={handlePress} style={styles.deviceName}>{device.name}</Text>
-    );
-  }
-
   render() {
-    const { nearbyDevices, info } = this.state;
+    const { info } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Home</Text>
-        <Text>{info}</Text>
+        <Text>Wheelie Angle: {info} degrees</Text>
       </View>
     );
   }
 }
 
-export default App;
+export default Home;
