@@ -57,6 +57,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/martin/code/wheelie-assist/android/app/build/intermediates/exploded-aar/com.android.support/customtabs/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e4a9d42c6d45eed4fd52f28dee859884131eae4c">
+        <dex dex="/Users/martin/code/wheelie-assist/android/app/build/intermediates/pre-dexed/debug/com.android.support-customtabs-23.0.1_476de9e5fef7004b0ca252636c495227aa0e03aa.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/martin/code/wheelie-assist/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -153,6 +162,24 @@
         revision="23.0.1"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
         <dex dex="/Users/martin/code/wheelie-assist/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_0bf533005ed3edd33a0adf43f2ed731df0d0f563.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/martin/code/wheelie-assist/android/app/build/intermediates/exploded-aar/wheelieassist/react-native-auth0/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="eda8e3c4339b2223672c8755b50b0b2a4481317e">
+        <dex dex="/Users/martin/code/wheelie-assist/android/app/build/intermediates/pre-dexed/debug/wheelieassist-react-native-auth0-unspecified_421eeadc71e5a0f423bfa5dc10b4d09722c4e78a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/martin/code/wheelie-assist/android/app/build/intermediates/exploded-aar/wheelieassist/react-native-svg/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="cd01a6436dfd3bb91e3c05f2d3b699c9a93d84db">
+        <dex dex="/Users/martin/code/wheelie-assist/android/app/build/intermediates/pre-dexed/debug/wheelieassist-react-native-svg-unspecified_e597953809500427a93175874f59ad555149af60.jar" />
     </item>
     <item
         is-multidex="false"

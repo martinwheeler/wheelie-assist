@@ -56,6 +56,7 @@ class Home extends React.Component {
   componentWillUnmount () {
     this.manager.cancelDeviceConnection(this.connectedDevice.id)
     this.manager.destroy();
+    clearInterval(this.pollingInterval);
   }
 
   componentWillMount () {
