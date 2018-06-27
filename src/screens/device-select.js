@@ -1,7 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback, ActivityIndicator } from 'react-native';
 
 const sneakyLog = (meta) => (data) => {
   console.log(meta, data);
@@ -64,7 +64,7 @@ class DeviceSelect extends React.Component {
     super(props);
 
     this.state = {
-      info: '',
+      error: null,
       values: {},
       nearbyDevices: [],
       loading: false
@@ -93,12 +93,8 @@ class DeviceSelect extends React.Component {
     }
   }
 
-  info(message) {
-    this.setState({info: message})
-  }
-
   error(message) {
-    this.setState({info: "ERROR: " + message})
+    this.setState({ error: "ERROR: " + message })
   }
 
   scanDevices() {
@@ -154,16 +150,12 @@ class DeviceSelect extends React.Component {
   renderDevices ({ item: device }) {
         const { navigation: { navigate } } = this.props;
         const handlePress = () => {
-          this.info(`Connecting to ${device.name}`)
-          
-          setTimeout(() => this.setState({ loading: true }), 250);
+          this.setState({ loading: true });
 
-          // TODO: Move the connection logic to the next screen as the lag of navigation
-          // feels super janky
           this.connectToDevice(device, { autoConnect: true })
               .then((connectedDevice) => {
-                this.setState({ loading: false });
                 navigate('Home', { device: connectedDevice })
+                this.resetLoading();
               })
               .catch(error => {
                 this.setState({ loading: false });
@@ -183,25 +175,38 @@ class DeviceSelect extends React.Component {
         );
   }
 
+  resetLoading () {
+    setTimeout(() => this.setState({ loading: false }), 420);
+  }
+
   render() {
-    const { nearbyDevices, info, loading } = this.state;
-    const { navigation: { navigate } } = this.props;
+    const { nearbyDevices, loading, error } = this.state;
+
     return (
       <View style={styles.container}>
         <Text style={styles.summary}>Select your Wheelie Assist from the devices below.</Text>
-        {!loading && (
-          <FlatList
-            style={styles.listContainer}
-            data={nearbyDevices}
-            keyExtractor={this.deviceKeyExtractor}
-            renderItem={this.renderDevices}
-          />
-        )}
-        {loading && (
-          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-            <Text>{info}</Text>
-          </View>
-        )}
+        {
+          [
+            !loading && (
+              <FlatList
+                style={styles.listContainer}
+                data={nearbyDevices}
+                keyExtractor={this.deviceKeyExtractor}
+                renderItem={this.renderDevices}
+              />
+            ),
+            loading && (
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                <ActivityIndicator size="large" color="hsla(195, 100%, 44%, 1)" />
+              </View>
+            ),
+            error && (
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                <Text>{info}</Text>
+              </View>
+            )
+          ].filter(Boolean)
+        }
       </View>
     );
   }

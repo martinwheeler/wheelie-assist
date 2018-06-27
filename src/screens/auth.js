@@ -1,7 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback, AsyncStorage } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback, AsyncStorage, ActivityIndicator } from 'react-native';
 import Auth0 from 'react-native-auth0';
 const auth0 = new Auth0({ domain: 'wheelie-assist.au.auth0.com', clientId: 'a3Esov3tdCq7HtBapXFvuKDiqonZoG6F' });
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 @autobind
 class DeviceSelect extends React.Component {
   static navigationOptions = {
-    title: 'Login to Wheelie Assist',
+    title: 'Wheelie Assist',
     headerStyle: {
       backgroundColor: 'hsla(353, 82%, 45%, 1)',
     },
@@ -48,14 +48,19 @@ class DeviceSelect extends React.Component {
     }
   };
 
+  state = {
+    loading: false
+  };
+
   async componentWillMount () {
-    await this.attemptAuth();
+    // await this.attemptAuth();
   }
 
-  async attemptAuth () {
+  attemptAuth () {
     const { navigation: { navigate } } = this.props;
+    this.setState({ loading: true });
 
-    await AsyncStorage.getItem('authCredentials')
+    AsyncStorage.getItem('authCredentials')
       .then((credentials) => {
         const parsedCredentials = JSON.parse(credentials);
         const currentTimestamp = +(new Date().getTime()/1000).toFixed(0);
@@ -75,18 +80,27 @@ class DeviceSelect extends React.Component {
 
                     await AsyncStorage.setItem('authCredentials', JSON.stringify(credentials));
                     navigate('DeviceSelect');
+                    this.resetLoading();
                   }
                 })
                 .catch(error => console.log(error));
         } else if (parsedCredentials && !hasExpired) {
           navigate('DeviceSelect');
+          this.resetLoading();
         }
       });
   }
 
+  resetLoading () {
+    setTimeout(() => this.setState({ loading: false }), 420);
+  }
+
   render() {
+    const { loading } = this.state;
+
     return (
       <View style={styles.container}>
+        {!loading && (
         <TouchableNativeFeedback
             onPress={this.attemptAuth}
             background={TouchableNativeFeedback.SelectableBackground()}
@@ -95,6 +109,10 @@ class DeviceSelect extends React.Component {
               <Text style={styles.buttonLabel}>LOGIN</Text>
             </View>
           </TouchableNativeFeedback>
+        )}
+        {loading && (
+          <ActivityIndicator size="large" color="hsla(195, 100%, 44%, 1)" />
+        )}
       </View>
     );
   }
