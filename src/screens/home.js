@@ -1,7 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Platform, Image } from 'react-native';
 import base64 from 'base-64';
 import { serviceUUID, characteristicUUID } from '../config';
 
@@ -48,7 +48,8 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      info: '',
+      angle: 0,
+      error: null,
       values: {}
     };
   }
@@ -63,19 +64,6 @@ class Home extends React.Component {
     this.connectedDevice = this.props.navigation.getParam('device', null);
     this.manager = new BleManager();
 
-    // this.manager.connectedDevices([serviceUUID])
-    //   .then(devices => {
-    //     console.log('NATIVE_APP', devices);
-    //     const [myDevice] = devices;
-    //     myDevice.isConnected()
-    //       .then(response => {
-    //         if (!response) return myDevice.connect();
-    //       })
-    //       .then(() => {
-    //         console.log('NATIVE_APP Connected', response)
-    //       })
-    //   })
-
     if (this.connectedDevice && this.manager) {
       this.manager.onDeviceDisconnected(this.connectedDevice.id, (error, device) => this.error('The Wheelie Assist has lost connection. Re-connecting...'));
       this.setupNotifications(this.connectedDevice);
@@ -84,12 +72,15 @@ class Home extends React.Component {
     }
   }
 
-  info(message) {
-    this.setState({info: message})
+  angle (value) {
+    // Short-circuit to prevent unwanted updates to the angle
+    if (!value) return;
+
+    this.setState({ angle: value })
   }
 
   error(message) {
-    this.setState({info: "ERROR: " + message})
+    this.setState({ error: "ERROR: " + message })
   }
 
   handleDeviceDisconnection (error, device) {
@@ -109,16 +100,34 @@ class Home extends React.Component {
     this.pollingInterval = setInterval(() => {
       this.connectedCharacteristic.read()
         .then(newValue => {
-          this.info(base64.decode(newValue.value));
+          this.angle(parseInt(base64.decode(newValue.value)));
         });
     }, 500);
   }
 
+  motorcycleStyles () {
+    const { angle } = this.state;
+
+    return {
+      transform: [{ rotate: `-${angle}deg` }]
+    }
+  }
+
   render() {
-    const { info } = this.state;
+    const { error, angle } = this.state;
+
     return (
       <View style={styles.container}>
-        <Text>Wheelie Angle: {info || '0'} degrees</Text>
+        {
+          [
+            angle >= 0 && !error && (
+              <Image style={this.motorcycleStyles()} source={require('../assets/images/motorcycle.png')} />
+            ),
+            error && (
+              <Text>{error}</Text>
+            )
+          ].filter(Boolean)
+        }
       </View>
     );
   }

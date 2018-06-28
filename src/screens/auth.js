@@ -52,15 +52,15 @@ class DeviceSelect extends React.Component {
     loading: false
   };
 
-  async componentWillMount () {
-    // await this.attemptAuth();
+  componentWillMount () {
+    this.attemptAuth();
   }
 
-  attemptAuth () {
+  async attemptAuth () {
     const { navigation: { navigate } } = this.props;
     this.setState({ loading: true });
 
-    AsyncStorage.getItem('authCredentials')
+    await AsyncStorage.getItem('authCredentials')
       .then((credentials) => {
         const parsedCredentials = JSON.parse(credentials);
         const currentTimestamp = +(new Date().getTime()/1000).toFixed(0);
