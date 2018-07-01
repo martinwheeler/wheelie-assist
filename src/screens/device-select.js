@@ -1,7 +1,17 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback, ActivityIndicator } from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Text,
+  Platform,
+  Image,
+  TouchableNativeFeedback,
+  ActivityIndicator,
+  AsyncStorage
+} from 'react-native';
 
 const sneakyLog = (meta) => (data) => {
   console.log(meta, data);
@@ -80,6 +90,7 @@ class DeviceSelect extends React.Component {
   componentWillMount () {
     this.manager = new BleManager();
     this.setState({ nearbyDevices: [] }); // Clear the list
+    AsyncStorage.setItem('wheelies', '');
 
     if (Platform.OS === 'ios') {
       const subscription = this.manager.onStateChange((state) => {
@@ -109,7 +120,7 @@ class DeviceSelect extends React.Component {
 
         if (device.name) {
           const containsDevice = this.state.nearbyDevices.find(currentDevice => device.name === currentDevice.name);
-  
+
           if (!containsDevice) {
             this.setState({
               nearbyDevices: [

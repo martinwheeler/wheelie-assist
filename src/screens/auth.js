@@ -1,9 +1,19 @@
-import React from 'react';
 import { autobind } from 'core-decorators';
-import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Image, TouchableNativeFeedback, AsyncStorage, ActivityIndicator } from 'react-native';
+import React from 'react';
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  StyleSheet,
+  Text,
+  TouchableNativeFeedback,
+  View
+} from 'react-native';
 import Auth0 from 'react-native-auth0';
-const auth0 = new Auth0({ domain: 'wheelie-assist.au.auth0.com', clientId: 'a3Esov3tdCq7HtBapXFvuKDiqonZoG6F' });
+
+const auth0 = new Auth0({
+  domain: 'wheelie-assist.au.auth0.com',
+  clientId: 'a3Esov3tdCq7HtBapXFvuKDiqonZoG6F'
+});
 
 const sneakyLog = (meta) => (data) => {
   console.log(meta, data);
@@ -40,11 +50,11 @@ class DeviceSelect extends React.Component {
   static navigationOptions = {
     title: 'Wheelie Assist',
     headerStyle: {
-      backgroundColor: 'hsla(353, 82%, 45%, 1)',
+      backgroundColor: 'hsla(353, 82%, 45%, 1)'
     },
     headerTintColor: '#FFF',
     headerTitleStyle: {
-      fontWeight: 'bold',
+      fontWeight: 'bold'
     }
   };
 
@@ -63,9 +73,9 @@ class DeviceSelect extends React.Component {
     await AsyncStorage.getItem('authCredentials')
       .then((credentials) => {
         const parsedCredentials = JSON.parse(credentials);
-        const currentTimestamp = +(new Date().getTime()/1000).toFixed(0);
+        const currentTimestamp = +(new Date().getTime() / 1000).toFixed(0);
         let hasExpired = false;
-        
+
         if (parsedCredentials) {
           hasExpired = (parsedCredentials.expireTimestamp || 0) < currentTimestamp;
         }
@@ -73,17 +83,20 @@ class DeviceSelect extends React.Component {
         if (!parsedCredentials || hasExpired) {
           auth0
             .webAuth
-              .authorize({scope: 'openid profile email', audience: 'https://wheelie-assist.au.auth0.com/userinfo'})
-                .then(async (credentials) => {
-                  if (credentials) {
-                    credentials.expireTimestamp = currentTimestamp + credentials.expiresIn;
+            .authorize({
+              scope: 'openid profile email',
+              audience: 'https://wheelie-assist.au.auth0.com/userinfo'
+            })
+            .then(async (credentials) => {
+              if (credentials) {
+                credentials.expireTimestamp = currentTimestamp + credentials.expiresIn;
 
-                    await AsyncStorage.setItem('authCredentials', JSON.stringify(credentials));
-                    navigate('DeviceSelect');
-                    this.resetLoading();
-                  }
-                })
-                .catch(error => console.log(error));
+                await AsyncStorage.setItem('authCredentials', JSON.stringify(credentials));
+                navigate('DeviceSelect');
+                this.resetLoading();
+              }
+            })
+            .catch(error => console.log(error));
         } else if (parsedCredentials && !hasExpired) {
           navigate('DeviceSelect');
           this.resetLoading();
@@ -95,13 +108,13 @@ class DeviceSelect extends React.Component {
     setTimeout(() => this.setState({ loading: false }), 420);
   }
 
-  render() {
+  render () {
     const { loading } = this.state;
 
     return (
       <View style={styles.container}>
         {!loading && (
-        <TouchableNativeFeedback
+          <TouchableNativeFeedback
             onPress={this.attemptAuth}
             background={TouchableNativeFeedback.SelectableBackground()}
           >
@@ -111,7 +124,7 @@ class DeviceSelect extends React.Component {
           </TouchableNativeFeedback>
         )}
         {loading && (
-          <ActivityIndicator size="large" color="hsla(195, 100%, 44%, 1)" />
+          <ActivityIndicator size="large" color="hsla(195, 100%, 44%, 1)"/>
         )}
       </View>
     );

@@ -1,9 +1,11 @@
-import React from 'react';
-import { autobind } from 'core-decorators';
-import { BleManager } from 'react-native-ble-plx';
-import { StyleSheet, FlatList, View, Text, Platform, Image } from 'react-native';
 import base64 from 'base-64';
-import { serviceUUID, characteristicUUID } from '../config';
+import { autobind } from 'core-decorators';
+import React from 'react';
+import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { BleManager } from 'react-native-ble-plx';
+import { connect } from 'react-redux';
+import { characteristicUUID, serviceUUID } from '../config';
+import { getWheelies, saveWheelie } from '../models/wheelies';
 
 const sneakyLog = (meta) => (data) => {
   console.log(meta, data);
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   deviceName: {
     backgroundColor: '#32b3ff',
@@ -35,11 +37,11 @@ class Home extends React.Component {
     return {
       title: `Connected to ${navigation.getParam('device', 'Unknown').name}`,
       headerStyle: {
-        backgroundColor: 'hsla(353, 82%, 45%, 1)',
+        backgroundColor: 'hsla(353, 82%, 45%, 1)'
       },
       headerTintColor: '#FFF',
       headerTitleStyle: {
-        fontWeight: 'bold',
+        fontWeight: 'bold'
       }
     };
   };
@@ -63,9 +65,13 @@ class Home extends React.Component {
   componentWillMount () {
     this.connectedDevice = this.props.navigation.getParam('device', null);
     this.manager = new BleManager();
+    this.props.getWheelies();
 
     if (this.connectedDevice && this.manager) {
-      this.manager.onDeviceDisconnected(this.connectedDevice.id, (error, device) => this.error('The Wheelie Assist has lost connection. Re-connecting...'));
+      this.manager.onDeviceDisconnected(
+        this.connectedDevice.id,
+        (error, device) => this.error('The Wheelie Assist has lost connection. Re-connecting...')
+      );
       this.setupNotifications(this.connectedDevice);
     } else {
       this.error('Please re-select your Wheelie Assist device from settings.');
@@ -75,11 +81,14 @@ class Home extends React.Component {
   angle (value) {
     // Short-circuit to prevent unwanted updates to the angle
     if (!value) return;
+    const { saveWheelie, wheelies } = this.props;
+    const newRecord = { angle: value, created: new Date().getTime() };
 
-    this.setState({ angle: value })
+    saveWheelie([ ...wheelies.list, newRecord ]);
+    this.setState({ angle: value });
   }
 
-  error(message) {
+  error (message) {
     this.setState({ error: "ERROR: " + message })
   }
 
@@ -88,12 +97,12 @@ class Home extends React.Component {
     this.error('The wheelie device has lost connection! Attempting to reconnect...');
   }
 
-  setupNotifications(device) {
-      device.readCharacteristicForService(serviceUUID, characteristicUUID)
-        .then(characteristic => {
-          this.connectedCharacteristic = characteristic;
-          this.startPollingValue();
-        });
+  setupNotifications (device) {
+    device.readCharacteristicForService(serviceUUID, characteristicUUID)
+      .then(characteristic => {
+        this.connectedCharacteristic = characteristic;
+        this.startPollingValue();
+      });
   }
 
   startPollingValue () {
@@ -109,22 +118,31 @@ class Home extends React.Component {
     const { angle } = this.state;
 
     return {
-      transform: [{ rotate: `-${angle}deg` }]
+      transform: [ { rotate: `-${angle}deg` } ]
     }
   }
 
-  render() {
+  render () {
     const { error, angle } = this.state;
+    const { list } = this.props.wheelies;
 
     return (
       <View style={styles.container}>
         {
           [
             angle >= 0 && !error && (
-              <Image style={this.motorcycleStyles()} source={require('../assets/images/motorcycle.png')} />
+              <Image key={'wheelie-picture'} style={this.motorcycleStyles()}
+                     source={require('../assets/images/motorcycle.png')}/>
             ),
             error && (
-              <Text>{error}</Text>
+              <Text key={'error-message'}>{error}</Text>
+            ),
+            list.length > 0 && (
+              <ScrollView style={{ height: 50 }}>
+                {list.map(wheelie => (
+                  <Text>{wheelie.angle} - {wheelie.created}</Text>
+                ))}
+              </ScrollView>
             )
           ].filter(Boolean)
         }
@@ -133,4 +151,13 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  wheelies: state.entities.wheelies
+});
+
+const mapDispatchToProps = dispatch => ({
+  getWheelies: () => dispatch(getWheelies()),
+  saveWheelie: payload => dispatch(saveWheelie(payload))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

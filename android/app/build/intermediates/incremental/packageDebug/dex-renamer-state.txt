@@ -1,4 +1,0 @@
-#Thu Jun 28 08:06:26 AEST 2018
-base.0=/Users/martin/code/wheelie-assist/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/Users/martin/code/wheelie-assist/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
