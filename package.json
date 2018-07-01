@@ -1,6 +1,6 @@
 {
   "name": "wheelie-assist",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "devDependencies": {
     "@target-corp/react-native-svg-parser": "^1.0.5",
