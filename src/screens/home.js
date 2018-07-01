@@ -1,8 +1,9 @@
 import base64 from 'base-64';
 import { autobind } from 'core-decorators';
 import React from 'react';
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { characteristicUUID, serviceUUID } from '../config';
 import { getWheelies, saveWheelie } from '../models/wheelies';
@@ -28,6 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#00FF00',
     padding: 5,
     margin: 10
+  },
+  settingsButtonWrapper: {
+  },
+  settingsButtonContainer: {
+    padding: 15
   }
 });
 
@@ -36,13 +42,22 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: `Connected to ${navigation.getParam('device', 'Unknown').name}`,
-      headerStyle: {
-        backgroundColor: 'hsla(353, 82%, 45%, 1)'
-      },
-      headerTintColor: '#FFF',
-      headerTitleStyle: {
-        fontWeight: 'bold'
-      }
+      headerRight: (
+        <View style={{ borderRadius: 100, overflow: 'hidden' }}>
+          <TouchableNativeFeedback
+            onPress={() => navigation.navigate('Settings')}
+            background={TouchableNativeFeedback.SelectableBackground()}
+            style={styles.settingsButtonWrapper}
+          >
+            <View style={styles.settingsButtonContainer}>
+              <Icon
+                name='settings'
+                color='#FFFFFF'
+              />
+            </View>
+          </TouchableNativeFeedback>
+        </View>
+      )
     };
   };
 
@@ -137,8 +152,8 @@ class Home extends React.Component {
             error && (
               <Text key={'error-message'}>{error}</Text>
             ),
-            list.length > 0 && (
-              <ScrollView style={{ height: 50 }}>
+            list.length === -1 && (
+              <ScrollView key={'scroll-view'} style={{ height: 50 }}>
                 {list.map(wheelie => (
                   <Text>{wheelie.angle} - {wheelie.created}</Text>
                 ))}

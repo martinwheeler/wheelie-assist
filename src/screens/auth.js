@@ -1,3 +1,4 @@
+import { APP_COLOR } from '../config';
 import { autobind } from 'core-decorators';
 import React from 'react';
 import {
@@ -6,7 +7,8 @@ import {
   StyleSheet,
   Text,
   TouchableNativeFeedback,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
 
@@ -48,14 +50,7 @@ const styles = StyleSheet.create({
 @autobind
 class DeviceSelect extends React.Component {
   static navigationOptions = {
-    title: 'Wheelie Assist',
-    headerStyle: {
-      backgroundColor: 'hsla(353, 82%, 45%, 1)'
-    },
-    headerTintColor: '#FFF',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
+    title: 'Wheelie Assist'
   };
 
   state = {
@@ -113,6 +108,10 @@ class DeviceSelect extends React.Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar
+          backgroundColor={APP_COLOR}
+          barStyle="light-content"
+        />
         {!loading && (
           <TouchableNativeFeedback
             onPress={this.attemptAuth}

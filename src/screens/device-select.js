@@ -60,14 +60,7 @@ const styles = StyleSheet.create({
 @autobind
 class DeviceSelect extends React.Component {
   static navigationOptions = {
-    title: 'Select Device',
-    headerStyle: {
-      backgroundColor: 'hsla(353, 82%, 45%, 1)',
-    },
-    headerTintColor: '#FFF',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    }
+    title: 'Select Device'
   };
 
   constructor (props) {
@@ -90,6 +83,7 @@ class DeviceSelect extends React.Component {
   componentWillMount () {
     this.manager = new BleManager();
     this.setState({ nearbyDevices: [] }); // Clear the list
+    // TODO: Remove once we have the 1000 limit applied
     AsyncStorage.setItem('wheelies', '');
 
     if (Platform.OS === 'ios') {
@@ -165,7 +159,7 @@ class DeviceSelect extends React.Component {
 
           this.connectToDevice(device, { autoConnect: true })
               .then((connectedDevice) => {
-                navigate('Home', { device: connectedDevice })
+                navigate('Home', { device: connectedDevice });
                 this.resetLoading();
               })
               .catch(error => {
@@ -200,6 +194,7 @@ class DeviceSelect extends React.Component {
           [
             !loading && (
               <FlatList
+                key={'device-list'}
                 style={styles.listContainer}
                 data={nearbyDevices}
                 keyExtractor={this.deviceKeyExtractor}
@@ -207,13 +202,13 @@ class DeviceSelect extends React.Component {
               />
             ),
             loading && (
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+              <View key={'loading-spinner'} style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                 <ActivityIndicator size="large" color="hsla(195, 100%, 44%, 1)" />
               </View>
             ),
             error && (
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                <Text>{info}</Text>
+              <View key={'error-message'} style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                <Text>{error}</Text>
               </View>
             )
           ].filter(Boolean)

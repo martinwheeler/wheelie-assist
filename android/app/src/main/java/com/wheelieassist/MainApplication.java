@@ -3,6 +3,7 @@ package com.wheelieassist;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.auth0.react.A0Auth0Package;
 import com.horcrux.svg.SvgPackage;
 import com.polidea.reactnativeble.BlePackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new A0Auth0Package(),
             new SvgPackage(),
             new BlePackage()
