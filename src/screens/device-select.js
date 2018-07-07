@@ -65,32 +65,59 @@ class DeviceSelect extends React.Component {
 
     this.state = {
       error: null,
+      info: null,
       values: {},
       nearbyDevices: [],
-      loading: false
+      loading: true
     };
 
     this.deviceKeyExtractor = (device) => device.id;
+    this.subscription = null;
+    this.isFocused = null;
   }
 
   componentWillUnmount () {
     this.manager.destroy();
+    this.subscription.remove();
+    this.isFocused.remove();
+  }
+
+  componentDidMount () {
+    
   }
 
   componentWillMount () {
-    this.manager = new BleManager();
     this.setState({ nearbyDevices: [] }); // Clear the list
+    this.isFocused = this.props.navigation.addListener('didFocus', () => {
+      this.manager = new BleManager();
+      this.listenForBLEPoweredOn();
+    })
+  }
 
-    if (Platform.OS === 'ios') {
-      const subscription = this.manager.onStateChange((state) => {
-        if (state === 'PoweredOn') {
-          this.scanDevices();
-          subscription.remove();
-        }
-      })
-    } else {
-      this.scanDevices();
-    }
+  async listenForBLEPoweredOn () {
+    this.setState({ loading: true, nearbyDevices: [] });
+    
+    await this.manager.state()
+      .then((currentState) => {
+        if (currentState !== 'PoweredOn') {
+            this.info('Please turn on your Bluetooth.');
+            this.subscription = this.manager.onStateChange((state) => {
+              if (state === 'PoweredOn') {
+                this.info(null);
+                this.scanDevices();
+                this.subscription.remove();
+              }
+            });
+          } else {
+            this.info(null);
+            this.scanDevices();
+          }
+        });
+
+  }
+
+  info (message) {
+    this.setState({ info: message });
   }
 
   error(message) {
@@ -98,13 +125,18 @@ class DeviceSelect extends React.Component {
   }
 
   scanDevices() {
+    this.setState({ loading: false });
+    
     this.manager.startDeviceScan(
       null,
       null,
       (error, device) => {
         if (error) {
-          this.error(error.message)
-          return
+          if (error.errorCode === 102) {
+            this.listenForBLEPoweredOn();
+          }
+          else this.error(error.message);
+          return;
         }
 
         if (device.name) {
@@ -180,7 +212,8 @@ class DeviceSelect extends React.Component {
   }
 
   render() {
-    const { nearbyDevices, loading, error } = this.state;
+    const { nearbyDevices, loading, error, info } = this.state;
+    const hasDevicesNearby = nearbyDevices.length > 0;
 
     return (
       <View style={styles.container}>
@@ -201,6 +234,11 @@ class DeviceSelect extends React.Component {
               </View>
             ),
             error && (
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                <Text>{error}</Text>
+              </View>
+            ),
+            info && (
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                 <Text>{info}</Text>
               </View>
